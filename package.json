@@ -1,0 +1,11 @@
+{
+  "name": "playground-jse",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "aereal <aereal@aereal.org>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1"
+  }
+}
