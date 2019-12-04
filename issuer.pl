@@ -11,7 +11,7 @@ sub encode {
   return encode_jwt(
     payload => { uid => 123 },
     key => \$private_key,
-    alg => 'RSA-OAEP',
+    alg => 'RS256',
     enc => 'A256CBC-HS512',
   );
 }
