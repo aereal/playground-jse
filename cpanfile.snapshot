@@ -154,3 +154,9 @@ DISTRIBUTIONS
       JSON::PP 2.27300
       Scalar::Util 0
       perl 5.006
+  Perl6-Slurp-0.051005
+    pathname: D/DC/DCONWAY/Perl6-Slurp-0.051005.tar.gz
+    provides:
+      Perl6::Slurp 0.051005
+    requirements:
+      ExtUtils::MakeMaker 0
