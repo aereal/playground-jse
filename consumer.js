@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const jwt = require('jsonwebtoken');
+const { JWE, JWK } = require('jose');
 const fs = require('fs');
 
 const bufSize = 4096;
@@ -12,6 +12,7 @@ while (true) {
   token += buf.slice(0, hasRead).toString('utf8');
 }
 
-const publicKey = fs.readFileSync('./keys/rsa.public.pem', 'utf8');
-const decoded = jwt.verify(token.trim(), publicKey, { algorithms: ['RSA-OAEP'] });
-process.stdout.write(JSON.stringify(decoded) + "\n")
+const privateKey = JWK.asKey(fs.readFileSync('./keys/rsa.private.pem', 'utf8'));
+const decrypted = JWE.decrypt(token.trim(), privateKey, { algorithms: ['RSA-OAEP'], complete: true });
+const decoded = typeof decrypted === 'object' ? JSON.stringify(decrypted) : decrypted.toString();
+process.stdout.write(decoded + "\n")
