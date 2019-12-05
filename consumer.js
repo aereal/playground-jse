@@ -12,6 +12,6 @@ while (true) {
   token += buf.slice(0, hasRead).toString('utf8');
 }
 
-const publicKey = fs.readFileSync('./keys/public-key.pem', 'utf8');
-const decoded = jwt.verify(token.trim(), publicKey, { algorithms: ['RS256'] });
+const publicKey = fs.readFileSync('./keys/rsa.public.pem', 'utf8');
+const decoded = jwt.verify(token.trim(), publicKey, { algorithms: ['RSA-OAEP'] });
 process.stdout.write(JSON.stringify(decoded) + "\n")
