@@ -6,7 +6,6 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "jose": "^1.16.0",
-    "jsonwebtoken": "^8.5.1"
+    "jose": "^1.16.0"
   }
 }
