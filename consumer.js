@@ -13,6 +13,6 @@ while (true) {
 }
 
 const privateKey = JWK.asKey(fs.readFileSync('./keys/rsa.private.pem', 'utf8'));
-const decrypted = JWE.decrypt(token.trim(), privateKey, { algorithms: ['RSA-OAEP'], complete: true });
+const decrypted = JWE.decrypt(token.trim(), privateKey, { algorithms: ['RSA1_5'], complete: true });
 const decoded = typeof decrypted === 'object' ? JSON.stringify(decrypted) : decrypted.toString();
 process.stdout.write(decoded + "\n")
