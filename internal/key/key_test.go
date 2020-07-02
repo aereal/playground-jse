@@ -15,6 +15,74 @@ import (
 	"gopkg.in/square/go-jose.v2/jwt"
 )
 
+func TestIssueEncryptedToken(t *testing.T) {
+	loc, err := time.LoadLocation("Asia/Tokyo")
+	if err != nil {
+		t.Fatal(err)
+	}
+	issuedAt, err := time.ParseInLocation(time.RFC3339, "2006-01-02T15:04:05Z", loc)
+	if err != nil {
+		t.Fatal(err)
+	}
+	expiry := issuedAt.Add(time.Hour)
+
+	privKey, err := loadOrCreateKey()
+	if err != nil {
+		t.Fatal(err)
+	}
+	signer, err := NewSigner(privKey)
+	if err != nil {
+		t.Fatal(err)
+	}
+	enc, err := NewEncrypter(privKey.Public())
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	type args struct {
+		signer    jose.Signer
+		encrypter jose.Encrypter
+		claims    Claims
+	}
+	tests := []struct {
+		name    string
+		args    args
+		want    string
+		wantErr bool
+	}{
+		{
+			name: "ok",
+			args: args{
+				signer:    signer,
+				encrypter: enc,
+				claims: Claims{
+					Issuer:    "iss.example.com",
+					Subject:   "sub",
+					Audience:  jwt.Audience{"aud.example.com"},
+					ID:        "123",
+					Expiry:    jwt.NewNumericDate(expiry),
+					NotBefore: jwt.NewNumericDate(issuedAt),
+					IssuedAt:  jwt.NewNumericDate(issuedAt),
+				},
+			},
+			want:    "eyJhbGciOiJSU0EtT0FFUCIsImN0eSI6IkpXVCIsImVuYyI6IkExMjhHQ00iLCJ0eXAiOiJKV1QifQ.g_AhYC1J95G1zRY8WH6qwhTrfsX2h-_BZ9NrTSa2h6Ewq7Ji-gftW8aRVr4QERc38WKEb9lfEVSpoaQ8pY93j6yMjarO8oueLZhXvulDVwCpaElWkiyx3E-_W5bL4sT-p2ARTms8EQIZMH09tB8wz-fBf54zfRDBvIaudEL9EcU.Q-R0NAHEno_BOqri.TQjBNMalw1Ble59tlMfEM9MpUxTrHR72FFKB6BG3TZXUJEVAGzxrjjOJfT6yatP68A3FZXxGKoROVp8NMjpk2sykmH_Ro1ZxVvrzVlF-RPJq8O3DJeJVWBgTWStqb2y7ms9RrHbbWwLPqYL_8cBpjrCQm0lW44PwFSk-itlapG4if3ncL8xi7Zr148hmWLRN9DLxYsrThXGDHpYyZ7iLkeyc-nJNdkBR6JL3JmUW8_i8NtVuaixFqOXVzJyfWE3__ECPNWo136T0P3QHJmIGNCnNOxBvexEA6hluwAoMQxRLvB0eDYH7pMz8KcYLmr8HmAa0gkxA8oTR14S-hMoBKxi4MLHqWqV5Ht45z4rx4nSdPj3FVLr1mJcSMKQhPeXU-ZQ4XBWRPK1Nlv_sMLXyAn38gdakansUR6FVlOj80r2YxL3f0kJf14-uhAVuMAhWuETOmXDEe4pljVp9vaxXECQbgQEnBpI3vtS6szWgP59QUvs1i2GjPxw.cE7LEhMsxcXWjXrf2qANfg",
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := IssueEncryptedToken(tt.args.signer, tt.args.encrypter, tt.args.claims)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("IssueEncryptedToken() error = %#v, wantErr %#v", err, tt.wantErr)
+				return
+			}
+			if got != tt.want {
+				t.Errorf("IssueEncryptedToken() = %#v, want %#v", got, tt.want)
+			}
+		})
+	}
+}
+
 func TestIssueToken(t *testing.T) {
 	loc, err := time.LoadLocation("Asia/Tokyo")
 	if err != nil {
