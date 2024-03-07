@@ -6,6 +6,6 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "jose": "^1.16.0"
+    "jose": "^2.0.7"
   }
 }
