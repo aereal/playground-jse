@@ -2,33 +2,14 @@
 # yarn lockfile v1
 
 
-asn1.js@^5.2.0:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/asn1.js/-/asn1.js-5.2.0.tgz#292c0357f26a47802ac9727e8772c09c7fc9bd85"
-  integrity sha512-Q7hnYGGNYbcmGrCPulXfkEw7oW7qjWeM4ZTALmgpuIcZLxyqqKYWxCZg2UBm8bklrnB4m2mGyJPWfoktdORD8A==
+"@panva/asn1.js@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@panva/asn1.js/-/asn1.js-1.0.0.tgz#dd55ae7b8129e02049f009408b97c61ccf9032f6"
+  integrity sha512-UdkG3mLEqXgnlKsWanWcgb6dOjUzJ+XC5f+aWw30qrtjxeNUSfKX1cd5FBzOaXQumoe9nIqeZUvrRJS03HCCtw==
+
+jose@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/jose/-/jose-2.0.7.tgz#3aabbaec70bff313c108b9406498a163737b16ba"
+  integrity sha512-5hFWIigKqC+e/lRyQhfnirrAqUdIPMB7SJRqflJaO29dW7q5DFvH1XCSTmv6PQ6pb++0k6MJlLRoS0Wv4s38Wg==
   dependencies:
-    bn.js "^4.0.0"
-    inherits "^2.0.1"
-    minimalistic-assert "^1.0.0"
-
-bn.js@^4.0.0:
-  version "4.11.8"
-  resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
-  integrity sha512-ItfYfPLkWHUjckQCk8xC+LwxgK8NYcXywGigJgSwOP8Y2iyWT4f2vsZnoOXTTbo+o5yXmIUJ4gn5538SO5S3gA==
-
-inherits@^2.0.1:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
-  integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
-
-jose@^1.16.0:
-  version "1.16.0"
-  resolved "https://registry.yarnpkg.com/jose/-/jose-1.16.0.tgz#72a7d77e3a15581fd6e70df314de2410c0d3ff06"
-  integrity sha512-NGk4WRGkwmClNHjNTePg5LlNATITinNJZu82yuAmEJMvhYF6qVGL8h3jJIKDT6bhBGsKwI8E4WIRMwcDFtdulw==
-  dependencies:
-    asn1.js "^5.2.0"
-
-minimalistic-assert@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/minimalistic-assert/-/minimalistic-assert-1.0.1.tgz#2e194de044626d4a10e7f7fbc00ce73e83e4d5c7"
-  integrity sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==
+    "@panva/asn1.js" "^1.0.0"
